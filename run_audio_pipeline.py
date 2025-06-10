@@ -12,7 +12,7 @@ def main():
     print(f"VAD cleaned audio saved to: {speech_only_path}")
 
     result = transcribe_audio(speech_only_path)
-    print(f"Transcript: {result['transcript']} (confidence: {result['confidence']})")
+    print(f"Transcript: {result['transcript']} ")
 
 if __name__ == "__main__":
     main()

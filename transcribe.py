@@ -1,14 +1,20 @@
-import whisper
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
 
+load_dotenv()  # this loads your .env file
 
-model = whisper.load_model("medium")  # try "tiny" for speed or Pi compatibility
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def transcribe_audio(audio_path: str):
     print(f"Transcribing audio at: {audio_path}")
-    
-    result = model.transcribe(audio_path)
-    
+
+    with open(audio_path, "rb") as audio_file:
+        response = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=audio_file
+        )
+
     return {
-        "transcript": result["text"],
-        "confidence": result.get("confidence", 0.9)  # Whisper doesn't always give this
+        "transcript": response.text        
     }
