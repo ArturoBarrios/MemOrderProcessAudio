@@ -2,7 +2,7 @@ from record import record_audio
 from vad import apply_vad
 from transcribe import transcribe_audio  # you'll mock or build this soon
 
-def main():
+def process_audio_pipeline():
     print("Starting audio processing pipeline...")
 
     audio_path = record_audio()
@@ -12,7 +12,6 @@ def main():
     print(f"VAD cleaned audio saved to: {speech_only_path}")
 
     result = transcribe_audio(speech_only_path)
-    print(f"Transcript: {result['transcript']} ")
+    print(f"Transcript: {result['transcript']}")
 
-if __name__ == "__main__":
-    main()
+    return result
